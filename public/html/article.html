@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style type="text/css">
+     #container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .content{
+            text-indent: 28px;
+            font-size: 14px;
+            margin-top:20px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h3>第一章</h3>
+        <div class="content"></div>
+    </div>
+</body>
+<script src="../js/lib/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+let id=location.href.split("?")[1].split("=")[1];
+// console.log(id);
+$.ajax({
+    type:"get",
+    url:"/article/content",
+    data:{
+        id
+    },
+    success:handleSucc
+})
+function handleSucc(data){
+    $("#container h3").html(data.data.data.articleTitle);
+    $("#container  .content").html(data.data.data.content);
+}
+</script>
+</html>
